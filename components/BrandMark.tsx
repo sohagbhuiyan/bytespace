@@ -12,7 +12,7 @@ export default function BrandMark({ withText = true, className = "" }: Props) {
     <Link href="/" aria-label="ByteSpace home" className={`inline-flex items-start gap-2 ${className}`}>
       <Image src="/icons/logo-mark.svg" alt="" width={29} height={32} className="h-[31.5px] w-[28.875px]" />
       {withText && (
-        <span className="mt-[7px] font-display text-2xl leading-none font-bold text-shuttle-50">ByteSpace</span>
+        <span className="mt-[7px] font-display text-2xl leading-none font-bold text-shuttle-950">ByteSpace</span>
       )}
     </Link>
   );
