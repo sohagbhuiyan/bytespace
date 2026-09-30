@@ -1,26 +1,88 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Persian Blue */
+  --color-brand: #003be2;
+  /* Electric Lime */
+  --color-lime: #d4fb20;
+  --color-lime-500: #cbfc01;
+  /* Shuttle Gray */
+  --color-shuttle-50: #f5f5f6;
+  --color-shuttle-100: #e5e6e8;
+  --color-shuttle-200: #ced0d3;
+  --color-shuttle-400: #82868e;
+  --color-shuttle-700: #4b4c53;
+  --color-shuttle-800: #424348;
+  --color-shuttle-950: #242528;
+  /* Black scale */
+  --color-ink: #040819;
+  --color-black-200: #d1d1d1;
+  --color-black-400: #888888;
+  --color-black-700: #4f4f4f;
+  --color-surface: #fafafa;
+
+  --font-sans: "Satoshi", ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Clash Display", var(--font-poppins), sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* Figma effect style "A" (layered drop shadow) applied to the cut-out's alpha.
+   CSS drop-shadow takes a std-deviation, i.e. half of Figma's blur radius. */
+@utility shadow-cutout {
+  filter: drop-shadow(51px 73px 36px rgb(0 0 0 / 0.13)) drop-shadow(26px 37px 18px rgb(0 0 0 / 0.1))
+    drop-shadow(10px 15px 8px rgb(0 0 0 / 0.08)) drop-shadow(2px 3px 3px rgb(0 0 0 / 0.06));
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-white font-sans text-shuttle-950 antialiased;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* 1200px content column (120px gutters at 1440) */
+@utility container-page {
+  width: 100%;
+  max-width: 1240px;
+  margin-inline: auto;
+  padding-inline: 20px;
+}
+
+/* Blue grid background: 2px white lines at 12% opacity every 120px */
+@utility bg-grid {
+  background-color: var(--color-brand);
+  background-image:
+    linear-gradient(to right, rgb(255 255 255 / 0.12) 2px, transparent 2px),
+    linear-gradient(to bottom, rgb(255 255 255 / 0.12) 2px, transparent 2px);
+  background-size: 120px 120px;
+}
+
+/* Soft floating animation for 3D ornaments */
+@keyframes float {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  50% {
+    translate: 0 -12px;
+  }
+}
+
+.float {
+  animation: float 6s ease-in-out infinite;
+}
+.float-slow {
+  animation: float 9s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .float,
+  .float-slow {
+    animation: none;
+  }
 }
