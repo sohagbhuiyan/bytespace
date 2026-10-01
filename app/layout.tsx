@@ -10,7 +10,7 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "ByteSpace | Get Access to Hundreds of Courses",
+  title: "ByteSpace New| Get Access to Hundreds of Courses",
   description:
     "Unlock your creativity, gain valuable knowledge, and grow your business with our wide range of courses.",
 };
