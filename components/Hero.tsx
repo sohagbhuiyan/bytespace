@@ -4,15 +4,19 @@ import { CategoryStatCard, HappyStudentsCard, LearningProgressCard } from "@/com
 export default function Hero() {
   return (
     <section className="relative isolate">
-      {/* ---------- 3D ornaments (exported group, 1440×804 starting 221px from the top of the frame) ---------- */}
-      <Image
-        src="/images/bgclip.png"
-        alt=""
-        width={1440}
-        height={804}
-        preload
-        className="pointer-events-none absolute top-[140px] left-1/2 -z-10 w-[760px] max-w-none -translate-x-1/2 sm:top-[180px] sm:w-[1100px] lg:top-[101px] lg:w-[1440px]"
-      />
+<div
+  aria-hidden
+  className="pointer-events-none absolute inset-0 -z-10 origin-top max-md:opacity-60 max-sm:scale-[0.45] sm:max-lg:scale-[0.7]"
+>
+  <Image
+    src="/images/bgclip.png"
+    alt=""
+    width={1440}
+    height={804}
+    preload
+    className="h-auto w-[760px] max-w-none sm:w-[1100px] lg:w-full lg:min-w-[1440px]"
+  />
+</div>
 
       {/* ---------- Text content ---------- */}
       <div className="container-page flex flex-col items-center gap-10 pt-8 text-center sm:pt-12 lg:gap-[60px] lg:pt-[49px]">

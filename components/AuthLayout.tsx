@@ -14,7 +14,7 @@ export default function AuthLayout({ title, description, children }: Props) {
     <div className="bg-grid min-h-screen overflow-hidden">
       <header className="container-page flex h-20 items-center lg:h-[120px] lg:items-start lg:pt-[35px] text-shuttle-50">
       
-        <BrandMark withText={true} />
+        <BrandMark withText={false} withTextwhite={true} />
       </header>
 
       <main className="container-page flex flex-col gap-10 pb-16 lg:flex-row lg:items-start lg:justify-between lg:gap-8 lg:pb-[120px]">

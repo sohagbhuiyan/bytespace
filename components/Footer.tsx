@@ -17,7 +17,7 @@ export default function Footer() {
           {/* Brand + newsletter */}
           <div className="flex flex-col gap-10 lg:w-[528px] lg:gap-[45px]">
             <div className="flex flex-col gap-4">
-              <BrandMark />
+              <BrandMark withText={true} withTextwhite={false} />
               <p className="text-sm leading-[1.6] text-shuttle-950">
                 Stay Up to date with our latest features and releases by joining our newsletter.
               </p>

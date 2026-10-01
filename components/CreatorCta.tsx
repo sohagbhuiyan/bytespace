@@ -1,32 +1,61 @@
 import Image from "next/image";
 import Link from "next/link";
 
-// Positions are from the 1440×488 CTA frame, expressed relative to its horizontal center (x − 720).
-const ornaments = [
-  { src: "/images/ornaments/spring-lime.png", size: 385, x: -838, y: -162 },
-  { src: "/images/ornaments/spring-white.png", size: 175, x: -542, y: 5, flip: true },
-  { src: "/images/ornaments/cone-white.png", size: 188, x: -768, y: 225 },
-  { src: "/images/ornaments/torus-lime.png", size: 342, x: -700, y: 299 },
-  { src: "/images/ornaments/pyramid-lime.png", size: 188, x: 360, y: 0 },
-  { src: "/images/ornaments/cylinder-white.png", size: 370, x: 506, y: 6 },
-  { src: "/images/ornaments/coil-lime.png", size: 330, x: 390, y: 289 },
+type Ornament = {
+  src: string;
+  size: number;
+  /** distance from the pinned edge (left or right) in the 1440 design */
+  offset: number;
+  /** top offset inside the section */
+  y: number;
+  flip?: boolean;
+};
+
+// Left group: offset = 720 + x   (x = position relative to the 1440 frame's center)
+const leftOrnaments: Ornament[] = [
+  { src: "/images/ornaments/spring-lime.png", size: 385, offset: -118, y: -162 },
+  { src: "/images/ornaments/spring-white.png", size: 175, offset: 178, y: 5, flip: true },
+  { src: "/images/ornaments/cone-white.png", size: 188, offset: -48, y: 225 },
+  { src: "/images/ornaments/torus-lime.png", size: 342, offset: 20, y: 299 },
 ];
+
+// Right group: offset = 720 - x - size
+const rightOrnaments: Ornament[] = [
+  { src: "/images/ornaments/pyramid-lime.png", size: 188, offset: 172, y: 0 },
+  { src: "/images/ornaments/cylinder-white.png", size: 370, offset: -156, y: 6 },
+  { src: "/images/ornaments/coil-lime.png", size: 330, offset: 0, y: 289 },
+];
+
+function OrnamentImage({ o, side }: { o: Ornament; side: "left" | "right" }) {
+  return (
+    <Image
+      src={o.src}
+      alt=""
+      width={o.size}
+      height={o.size}
+      className={`absolute max-w-none ${o.flip ? "-scale-x-100" : ""}`}
+      style={{ [side]: o.offset, top: o.y, width: o.size, height: o.size }}
+    />
+  );
+}
 
 export default function CreatorCta() {
   return (
     <section className="bg-grid relative isolate overflow-hidden">
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 max-md:opacity-60">
-        {ornaments.map((o) => (
-          <Image
-            key={o.src}
-            src={o.src}
-            alt=""
-            width={o.size}
-            height={o.size}
-            className={`absolute max-w-none ${o.flip ? "-scale-x-100" : ""}`}
-            style={{ left: `calc(50% + ${o.x}px)`, top: o.y, width: o.size, height: o.size }}
-          />
-        ))}
+        {/* Left group: pinned to the left edge */}
+        <div className="absolute inset-y-0 left-0 origin-top-left max-sm:scale-[0.45] sm:max-lg:scale-[0.7]">
+          {leftOrnaments.map((o) => (
+            <OrnamentImage key={o.src} o={o} side="left" />
+          ))}
+        </div>
+
+        {/* Right group: pinned to the right edge */}
+        <div className="absolute inset-y-0 right-0 origin-top-right max-sm:scale-[0.45] sm:max-lg:scale-[0.7]">
+          {rightOrnaments.map((o) => (
+            <OrnamentImage key={o.src} o={o} side="right" />
+          ))}
+        </div>
       </div>
 
       <div className="container-page flex min-h-[488px] flex-col items-center justify-center gap-8 py-20 text-center lg:gap-10">
